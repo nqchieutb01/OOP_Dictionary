@@ -13,13 +13,13 @@
    <children>
       <HBox layoutY="72.0" prefHeight="62.0" prefWidth="1023.0">
          <children>
-            <TextField fx:id="inputWordTextField" prefHeight="64.0" prefWidth="424.0">
+            <TextField fx:id="inputWordTextField" onKeyPressed="#textAreaKeyPress" prefHeight="62.0" prefWidth="248.0">
                <font>
                   <Font size="24.0" />
                </font></TextField>
-            <Button fx:id="myPcButton" mnemonicParsing="false" onAction="#buttonFindPress" prefHeight="62.0" prefWidth="62.0" />
+            <Button fx:id="myPcButton" mnemonicParsing="false" onAction="#buttonFindPressDB" prefHeight="62.0" prefWidth="62.0" />
             <HBox prefHeight="62.0" prefWidth="29.0" />
-            <Button fx:id="googleButton" mnemonicParsing="false" prefHeight="61.0" prefWidth="61.0" />
+            <Button fx:id="googleButton" mnemonicParsing="false" onAction="#buttonFindPressGG" prefHeight="61.0" prefWidth="61.0" />
          </children>
       </HBox>
       <Label layoutX="38.0" layoutY="8.0" prefHeight="55.0" prefWidth="436.0" text="Dictionary English - VietNamese" textFill="#d70a0a">
@@ -27,7 +27,7 @@
             <Font name="Arial Bold" size="27.0" />
          </font>
       </Label>
-      <TextArea fx:id="recommendTextArea" disable="true" layoutY="185.0" prefHeight="421.0" prefWidth="424.0" />
+      <TextArea fx:id="recommendTextArea" disable="true" layoutY="185.0" prefHeight="421.0" prefWidth="244.0" />
       <VBox layoutX="424.0" layoutY="134.0" prefHeight="43.0" prefWidth="601.0">
          <children>
             <Label prefHeight="46.0" prefWidth="591.0" text="                            Explain">
@@ -48,7 +48,7 @@
             <Font name="Bauhaus 93" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="142.0" layoutY="137.0" text="Recommend">
+      <Label layoutX="42.0" layoutY="137.0" text="Recommend">
          <font>
             <Font name="System Bold Italic" size="28.0" />
          </font>
@@ -65,6 +65,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="explainTextArea" layoutX="424.0" layoutY="185.0" prefHeight="421.0" prefWidth="559.0" />
+      <TextArea fx:id="explainTextArea" layoutX="245.0" layoutY="185.0" prefHeight="421.0" prefWidth="738.0" />
    </children>
 </AnchorPane>

@@ -4,6 +4,7 @@ import ggTranslate.Audio;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,6 +14,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -57,25 +60,44 @@ public class FindWord implements Initializable {
     @FXML private Button audioButton;
     public void audioButton() throws IOException, JavaLayerException {
         String word = inputWordTextField.getText();
+        if(word.length()==0) return;
         InputStream sound = audio.getAudio(word,"en");
         audio.play(sound);
     }
 
-    public void buttonFindPress() throws Exception {
+    // Find word in GG
+    public void buttonFindPressGG() throws Exception {
         String word = inputWordTextField.getText();
         String ggTranslate = translator.callUrlAndParseResult("en","vi",word);
         //recommendTextArea.setFont(javafx.scene.text.Font.font("Monospaced",28));
         explainTextArea.setText(ggTranslate);
-  //      recommendTextArea.setText(dictionary.search(word));
+    }
 
+    // Find word from database
+    public void buttonFindPressDB() throws Exception {
+        String word = inputWordTextField.getText();
+      //  System.out.println(word);
+        String mean = dictionary.searchWordTrie(word);
+        explainTextArea.setText(mean);
+    }
+
+    //text area Keypress
+    public void textAreaKeyPress(KeyEvent t){
+        String word = inputWordTextField.getText();
+        if(t.getCode() != KeyCode.ENTER){
+            word = inputWordTextField.getText();
+            //System.out.println(word);
+            recommendTextArea.setText(word);
+        } else {
+            word = inputWordTextField.getText();
+            String mean = dictionary.searchWordTrie(word);
+            explainTextArea.setText(mean);
+        }
     }
 
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 28;");
-        explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 28;");
 
        // load data
         dictionaryManagement = new DictionaryManagement();
@@ -85,7 +107,10 @@ public class FindWord implements Initializable {
             e.printStackTrace();
         }
         dictionary = dictionaryManagement.getDictionary();
-        dictionary.showAllWord();
+       // dictionary.showAllWord();
+
+        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 28;");
+        explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 16;");
 
         //  icon sound
         Image iconImage = new Image("img/icons8_Audio_20px.png");
