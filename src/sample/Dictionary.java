@@ -61,4 +61,5 @@ public class Dictionary {
             return Dict.get(appear).getWordExplain();
         }
     }
+
 }

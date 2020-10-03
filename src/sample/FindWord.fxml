@@ -27,10 +27,10 @@
             <Font name="Arial Bold" size="27.0" />
          </font>
       </Label>
-      <TextArea fx:id="recommendTextArea" disable="true" layoutY="185.0" prefHeight="421.0" prefWidth="244.0" />
+      <TextArea fx:id="recommendTextArea" layoutY="185.0" prefHeight="421.0" prefWidth="244.0" />
       <VBox layoutX="424.0" layoutY="134.0" prefHeight="43.0" prefWidth="601.0">
          <children>
-            <Label prefHeight="46.0" prefWidth="591.0" text="                            Explain">
+            <Label prefHeight="46.0" prefWidth="504.0" text="                  Explain">
                <font>
                   <Font name="System Bold Italic" size="31.0" />
                </font>

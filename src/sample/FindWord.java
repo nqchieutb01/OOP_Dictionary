@@ -29,6 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
@@ -36,6 +37,8 @@ public class FindWord implements Initializable {
     // data
     private DictionaryManagement dictionaryManagement;
     private Dictionary dictionary ;
+    private ArrayList<Word> Dict ;
+    private Trie trie = new Trie();
 
     @FXML private AnchorPane anchorPane;
 
@@ -87,7 +90,13 @@ public class FindWord implements Initializable {
         if(t.getCode() != KeyCode.ENTER){
             word = inputWordTextField.getText();
             //System.out.println(word);
-            recommendTextArea.setText(word);
+            ArrayList<Integer> rcm = trie.recommendWord(word);
+            String recommend = "";
+            for(Integer x:rcm){
+                recommend += Dict.get(x).getWordTarget() +'\n';
+            }
+            recommendTextArea.setText(recommend);
+
         } else {
             word = inputWordTextField.getText();
             String mean = dictionary.searchWordTrie(word);
@@ -107,6 +116,7 @@ public class FindWord implements Initializable {
             e.printStackTrace();
         }
         dictionary = dictionaryManagement.getDictionary();
+        Dict = dictionary.getDict();
        // dictionary.showAllWord();
 
         recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 28;");

@@ -36,11 +36,17 @@ public class DictionaryManagement {
                 dictionary.addWordTrie(word_target, word_explain);
                 word_target = "";
                 word_explain = "";
-                String[] part = line.split("/", 2);
-                if (part.length < 1) continue;
-                if (part[0].length() > 1) word_target = part[0].substring(1, part[0].length() - 1);
-                word_explain += "/";
-                if (part.length >= 2) word_explain += part[1];
+                int i = 1;
+                for(i=1;i<line.length();i++){
+                    Character ch= line.charAt(i);
+                    if(ch.equals('/')){
+                        word_explain = line.substring(i,line.length());
+                        word_target = line.substring(1,i-1);
+                        break;
+                    }
+                }
+                if(i>=line.length()-1) word_target = line.substring(1,line.length());
+
             } else {
                 word_explain += '\n';
                 word_explain += line;
