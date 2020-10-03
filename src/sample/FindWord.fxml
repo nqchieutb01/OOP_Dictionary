@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="605.0" prefWidth="1023.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FindWord">
+   <children>
+      <HBox layoutY="72.0" prefHeight="62.0" prefWidth="1023.0">
+         <children>
+            <TextField fx:id="inputWordTextField" prefHeight="64.0" prefWidth="424.0">
+               <font>
+                  <Font size="24.0" />
+               </font></TextField>
+            <Button fx:id="myPcButton" mnemonicParsing="false" onAction="#buttonFindPress" prefHeight="62.0" prefWidth="62.0" />
+            <HBox prefHeight="62.0" prefWidth="29.0" />
+            <Button fx:id="googleButton" mnemonicParsing="false" prefHeight="61.0" prefWidth="61.0" />
+         </children>
+      </HBox>
+      <Label layoutX="38.0" layoutY="8.0" prefHeight="55.0" prefWidth="436.0" text="Dictionary English - VietNamese" textFill="#d70a0a">
+         <font>
+            <Font name="Arial Bold" size="27.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="recommendTextArea" disable="true" layoutY="185.0" prefHeight="421.0" prefWidth="424.0" />
+      <VBox layoutX="424.0" layoutY="134.0" prefHeight="43.0" prefWidth="601.0">
+         <children>
+            <Label prefHeight="46.0" prefWidth="591.0" text="                            Explain">
+               <font>
+                  <Font name="System Bold Italic" size="31.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Button fx:id="soundButton" layoutX="983.0" layoutY="185.0" mnemonicParsing="false" onAction="#audioButton" prefHeight="40.0" prefWidth="40.0" textOverrun="WORD_ELLIPSIS">
+         <cursor>
+            <Cursor fx:constant="NE_RESIZE" />
+         </cursor>
+      </Button>
+      <Button fx:id="homeButton" layoutX="664.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="36.0" />
+      <Label layoutX="657.0" layoutY="53.0" prefHeight="20.0" prefWidth="51.0" text=" Home" textFill="#bf0a10">
+         <font>
+            <Font name="Bauhaus 93" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="142.0" layoutY="137.0" text="Recommend">
+         <font>
+            <Font name="System Bold Italic" size="28.0" />
+         </font>
+      </Label>
+      <Button fx:id="subtractButton" layoutX="882.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="36.0" />
+      <Button fx:id="addButton" layoutX="781.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="36.0" />
+      <Label layoutX="778.0" layoutY="50.0" text=" Add" textFill="#bf0a10">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="879.0" layoutY="50.0" text="Delete" textFill="#bf0a10">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="explainTextArea" layoutX="424.0" layoutY="185.0" prefHeight="421.0" prefWidth="559.0" />
+   </children>
+</AnchorPane>
