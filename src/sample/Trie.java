@@ -64,17 +64,17 @@ public class Trie {
         if(it.isEndOfWord!=-1){
             result.add(it.isEndOfWord);
         }
-        if(it!=null) result.addAll(backTrack(it));
+        if(it!=null) result.addAll(DFS(it));
         return result;
     }
 
-    public ArrayList<Integer> backTrack(TrieNode it) {
+    public ArrayList<Integer> DFS(TrieNode it) {
         ArrayList<Integer> result = new ArrayList<>();
         for (int index = 0; index < MAX_CHAR; index++) {
             if(result.size()>20) return result;
             TrieNode tmp = it.children[index];
             if (tmp != null) {
-                result.addAll(backTrack(tmp));
+                result.addAll(DFS(tmp));
                 if (tmp.isEndOfWord!= -1) {
                     result.add(tmp.isEndOfWord);
                 }
