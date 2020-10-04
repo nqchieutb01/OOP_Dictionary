@@ -52,8 +52,6 @@ public class DictionaryManagement {
                 word_explain += line;
             }
         }
-        int c = 'z' - ' ';
-        System.out.println(c);
         System.out.println("Number of words is: " + cnt.toString());
     }
 }

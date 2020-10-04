@@ -23,11 +23,11 @@ public class Trie {
         String key = s.toUpperCase();
         TrieNode it = root;
         for (int i = 0; i < key.length(); i++) {
-            //System.out.print(key.charAt(i));
             int index = key.charAt(i) - ' ';
             if (index > MAX_CHAR || index < 0) continue;
-            if (it.children[index] == null)
+            if (it.children[index] == null) {
                 it.children[index] = new TrieNode();
+            }
             it = it.children[index];
         }
         it.isEndOfWord = numerical_order;
@@ -42,19 +42,24 @@ public class Trie {
             if (it.children[index] == null) return -1;
             it = it.children[index];
         }
-        if (it != null && it.isEndOfWord != -1) return it.isEndOfWord;
+        if (it != null) return it.isEndOfWord;
         return -1;
     }
 
     public ArrayList<Integer> recommendWord(String s) {
         ArrayList<Integer> result = new ArrayList<>();
         String key = s.toUpperCase();
+        //debug
+       // System.out.println(key);
         TrieNode it = root;
         for (int i = 0; i < key.length(); i++) {
             int index = key.charAt(i) - ' ';
+           // System.out.println(index);
             if (index > MAX_CHAR || index < 0) continue;
-            if (it.children[index] == null) return result;
-            it = it.children[index];
+            if(it.children[index]!=null) {
+                it = it.children[index];
+            }
+            else return result;
         }
         if(it.isEndOfWord!=-1){
             result.add(it.isEndOfWord);
@@ -66,11 +71,12 @@ public class Trie {
     public ArrayList<Integer> backTrack(TrieNode it) {
         ArrayList<Integer> result = new ArrayList<>();
         for (int index = 0; index < MAX_CHAR; index++) {
+            if(result.size()>20) return result;
             TrieNode tmp = it.children[index];
             if (tmp != null) {
-                if (tmp.isEndOfWord != -1) {
+                result.addAll(backTrack(tmp));
+                if (tmp.isEndOfWord!= -1) {
                     result.add(tmp.isEndOfWord);
-                    result.addAll(backTrack(tmp));
                 }
             }
         }

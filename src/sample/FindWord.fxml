@@ -42,7 +42,7 @@
             <Cursor fx:constant="NE_RESIZE" />
          </cursor>
       </Button>
-      <Button fx:id="homeButton" layoutX="664.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="36.0" />
+      <Button fx:id="homeButton" layoutX="664.0" mnemonicParsing="false" onAction="#pressButtonHome" prefHeight="39.0" prefWidth="36.0" />
       <Label layoutX="657.0" layoutY="53.0" prefHeight="20.0" prefWidth="51.0" text=" Home" textFill="#bf0a10">
          <font>
             <Font name="Bauhaus 93" size="18.0" />

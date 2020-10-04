@@ -6,7 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -20,6 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import javazoom.jl.decoder.JavaLayerException;
 
 import javax.swing.*;
@@ -33,12 +38,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Stack;
 
+import sample.Main;
+
+import static sample.Main.dictionary;
+import static sample.Main.Dict;
+import static sample.Main.trie;
+
 public class FindWord implements Initializable {
-    // data
-    private DictionaryManagement dictionaryManagement;
-    private Dictionary dictionary ;
-    private ArrayList<Word> Dict ;
-    private Trie trie = new Trie();
 
     @FXML private AnchorPane anchorPane;
 
@@ -54,12 +60,19 @@ public class FindWord implements Initializable {
     @FXML private Button addButton;
     @FXML private Button subtractButton;
 
-    // input word
+    // input  ,recommend,explain word
     @FXML private TextField inputWordTextField;
-    // recommend word
     @FXML private TextArea recommendTextArea;
     @FXML private TextArea explainTextArea;
 
+    public void pressButtonHome(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent viewNextParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Scene viewNext = new Scene(viewNextParent);
+        //Get the stage information
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(viewNext);
+        window.show();
+    }
     @FXML private Button audioButton;
     public void audioButton() throws IOException, JavaLayerException {
         String word = inputWordTextField.getText();
@@ -87,6 +100,7 @@ public class FindWord implements Initializable {
     //text area Keypress
     public void textAreaKeyPress(KeyEvent t){
         String word = inputWordTextField.getText();
+        if(word.length()==0) return;
         if(t.getCode() != KeyCode.ENTER){
             word = inputWordTextField.getText();
             //System.out.println(word);
@@ -108,18 +122,9 @@ public class FindWord implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-       // load data
-        dictionaryManagement = new DictionaryManagement();
-        try {
-            dictionaryManagement.insertFromFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        dictionary = dictionaryManagement.getDictionary();
-        Dict = dictionary.getDict();
-       // dictionary.showAllWord();
 
-        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 28;");
+
+        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;");
         explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 16;");
 
         //  icon sound
