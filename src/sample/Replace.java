@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static sample.Main.*;
+
 public class Replace implements Initializable {
 
     // back ground
@@ -45,9 +47,11 @@ public class Replace implements Initializable {
 
     // press ok when add new word
     public void pressAgreeAddNewWord() throws Exception{
-        String wt = textFieldWord.getText();
-        String we = textFieldExplain.getText();
-        labelNotification.setText("Word "+ wt +" has been replaced successfully");
+        String ws = textFieldWord.getText();
+        String wt = textFieldExplain.getText();
+        String wordExplain = dictionary.deleteWordTrie(ws);
+        dictionary.addWordTrie(wt,wordExplain);
+        labelNotification.setText("Word "+ ws +" has been replaced successfully");
         labelNotification.setVisible(true);
     }
 

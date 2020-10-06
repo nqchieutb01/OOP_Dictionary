@@ -32,7 +32,20 @@ public class Trie {
         }
         it.isEndOfWord = numerical_order;
     }
+    public int delete(String wt){
+        int indexRemove ;
+        String key = wt.toUpperCase() ;
+        TrieNode it = root ;
+        for(int i=0;i<key.length();i++){
+            int index = key.charAt(i) - ' ' ;
+            if(index > MAX_CHAR || index<0) continue;
+            it = it.children[index] ;
+        }
+        indexRemove = it.isEndOfWord ;
+        it.isEndOfWord = -1 ;
+        return indexRemove ;
 
+    }
     public int search(String s) {
         String key = s.toUpperCase();
         TrieNode it = root;

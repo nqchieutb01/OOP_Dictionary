@@ -17,38 +17,53 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Delete implements  Initializable{ // back ground
-        @FXML
-        private Image backgroundImage ;
-        @FXML private ImageView imageView;
+import static sample.Main.dictionary;
+import static sample.Main.trie;
 
-        // text file explain, word target and notification when add successfully
-        @FXML private TextField textFieldWord ;
-        @FXML private Label labelNotification;
+public class Delete implements Initializable { // back ground
+    @FXML
+    private Image backgroundImage;
+    @FXML
+    private ImageView imageView;
 
-        //button home and add
-        @FXML private Button buttonHome ;
-        @FXML private Button buttonDelete ;
+    // text file explain, word target and notification when add successfully
+    @FXML
+    private TextField textFieldWord;
+    @FXML
+    private Label labelNotification;
+
+    //button home and add
+    @FXML
+    private Button buttonHome;
+    @FXML
+    private Button buttonDelete;
 
 
-        // back to FindWord scene
-        public void pressButtonFindWord(javafx.event.ActionEvent actionEvent) throws IOException {
-            Parent viewNextParent = FXMLLoader.load(getClass().getResource("FindWord.fxml"));
-            Scene viewNext = new Scene(viewNextParent);
-            //Get the stage information
-            Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            window.setScene(viewNext);
-            window.show();
+    // back to FindWord scene
+    public void pressButtonFindWord(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent viewNextParent = FXMLLoader.load(getClass().getResource("FindWord.fxml"));
+        Scene viewNext = new Scene(viewNextParent);
+        //Get the stage information
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(viewNext);
+        window.show();
+    }
+
+    // press ok when add new word
+    public void pressAgreeDeleteWord() throws Exception {
+        String wt = textFieldWord.getText();
+        if (trie.search(wt) != -1) {
+            labelNotification.setText("Word " + wt + " has been deleted successfully");
+            dictionary.deleteWordTrie(wt);
+        } else {
+            labelNotification.setText("Sorry !! Word " + wt + " can't be found in my data");
         }
+        labelNotification.setVisible(true);
+    }
 
-        // press ok when add new word
-        public void pressAgreeDeleteWord() throws Exception{
-            String wt = textFieldWord.getText();
-            labelNotification.setText("Word "+ wt +" has been deleted successfully");
-            labelNotification.setVisible(true);
-        }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         //  labelNotification.setVisible(true);
         backgroundImage = new Image("img/addbgr.jpg");
         imageView.setImage(backgroundImage);

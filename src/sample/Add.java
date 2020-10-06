@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static sample.Main.dictionary;
+
 public class Add implements Initializable {
 
     // back ground
@@ -48,6 +50,7 @@ public class Add implements Initializable {
     public void pressAgreeAddNewWord() throws Exception{
         String wt = textFieldWord.getText();
         String we = textFieldExplain.getText();
+        dictionary.addWordTrie(wt,we);
         labelNotification.setText("Word "+ wt +" has been added successfully");
         labelNotification.setVisible(true);
     }

@@ -127,7 +127,7 @@ public class FindWord implements Initializable {
         explainTextArea.setText(mean);
     }
 
-    //text area Keypress
+    //text area key press
     public void textAreaKeyPress(KeyEvent t){
         String word = inputWordTextField.getText();
         if(word.length()==0) return;

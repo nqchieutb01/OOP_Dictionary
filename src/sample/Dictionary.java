@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Dictionary {
     private ArrayList<Word> Dict;
 
-    public Trie trie  = new Trie();
+    public Trie trie = new Trie();
 
     public ArrayList<Word> getDict() {
         return Dict;
@@ -16,8 +16,9 @@ public class Dictionary {
     }
 
     /**
-     * Add, show, remove ,search with array
+     * Add, show, remove ,search delete with array
      */
+
     public void addWord(String word_target, String word_explain) {
         Word word = new Word();
         word.setWordExplain(word_explain);
@@ -37,27 +38,37 @@ public class Dictionary {
         }
         return new String("Your word doesn't exist in My Dictionary. Please, try searching with Google");
     }
-    public void showAllWord(){
-        for(Word word: Dict){
+
+    public void showAllWord() {
+        for (Word word : Dict) {
             System.out.println(word.getWordTarget());
         }
     }
+
     /**
-     * Add, show, dedete, search with Trie
+     * Add, show, dedete, search ,delete with Trie
      */
-    public void addWordTrie(String wt,String we){
+    public void addWordTrie(String wt, String we) {
         int appear = trie.search(wt);
-        if(appear ==-1){
-            Word word = new Word(wt,we);
+        if (appear == -1) {
+            Word word = new Word(wt, we);
             Dict.add(word);
-            trie.insert(wt,Dict.size()-1);
+            trie.insert(wt, Dict.size() - 1);
         }
     }
-    public String searchWordTrie(String wt){
+
+    public String deleteWordTrie(String wt) {
+        int indexRemove = trie.delete(wt);
+        String wordExplain = Dict.get(indexRemove).getWordExplain();
+        Dict.remove(wt);
+        return wordExplain ;
+    }
+
+    public String searchWordTrie(String wt) {
         int appear = trie.search(wt);
-        if(appear==-1) {
+        if (appear == -1) {
             return new String("Your word doesn't exist in My Dictionary. Please, try searching with Google");
-        }else{
+        } else {
             return Dict.get(appear).getWordExplain();
         }
     }
