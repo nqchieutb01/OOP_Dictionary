@@ -12,9 +12,9 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="605.0" prefWidth="1023.0" style="-fx-background-color: #ffffff;" stylesheets="@../test.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FindWord">
    <children>
-      <HBox layoutX="-2.0" layoutY="73.0" prefHeight="62.0" prefWidth="354.0">
+      <HBox layoutX="3.0" layoutY="73.0" prefHeight="62.0" prefWidth="349.0">
          <children>
-            <TextField fx:id="inputWordTextField" onKeyPressed="#textAreaKeyPress" onKeyTyped="#textAreaKeyPress" prefHeight="62.0" prefWidth="248.0">
+            <TextField fx:id="inputWordTextField" onKeyPressed="#textAreaKeyPressListView" onKeyTyped="#textAreaKeyPressListView" prefHeight="62.0" prefWidth="240.0">
                <font>
                   <Font size="24.0" />
                </font></TextField>
@@ -27,7 +27,6 @@
             <Font name="Arial Bold" size="27.0" />
          </font>
       </Label>
-      <TextArea fx:id="recommendTextArea" layoutY="185.0" prefHeight="421.0" prefWidth="244.0" />
       <VBox layoutX="424.0" layoutY="134.0" prefHeight="43.0" prefWidth="601.0">
          <children>
             <Label prefHeight="46.0" prefWidth="504.0" text="                  Explain">
@@ -95,5 +94,6 @@
             </Button>
          </children>
       </HBox>
+      <ListView fx:id="listView" layoutX="3.0" layoutY="186.0" onInputMethodTextChanged="#textAreaKeyPressListView" onKeyPressed="#textAreaKeyPressListView" onKeyReleased="#textAreaKeyPressListView" onMouseClicked="#listViewClick" prefHeight="421.0" prefWidth="240.0" />
    </children>
 </AnchorPane>

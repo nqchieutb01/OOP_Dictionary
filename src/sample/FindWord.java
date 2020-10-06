@@ -61,6 +61,9 @@ public class FindWord implements Initializable {
     @FXML private Button addButton;
     @FXML private Button subtractButton;
     @FXML private Button replaceButton ;
+    @FXML private Button likeButton;
+
+    @FXML private ListView listView ;
 
     // input  ,recommend,explain word
     @FXML private TextField inputWordTextField;
@@ -128,19 +131,23 @@ public class FindWord implements Initializable {
     }
 
     //text area key press
-    public void textAreaKeyPress(KeyEvent t){
+
+    public void textAreaKeyPressListView(KeyEvent t){
         String word = inputWordTextField.getText();
         if(word.length()==0) return;
         if(t.getCode() != KeyCode.ENTER){
             word = inputWordTextField.getText();
-            //System.out.println(word);
             ArrayList<Integer> rcm = trie.recommendWord(word);
             String recommend = "";
+            listView.getItems().clear();
+            ObservableList<String> recommends = FXCollections.observableArrayList();
+
             for(Integer x:rcm){
                 recommend += Dict.get(x).getWordTarget() +'\n';
+                recommends.add(Dict.get(x).getWordTarget()) ;
             }
-            recommendTextArea.setText(recommend);
-
+            listView.getItems().addAll(recommends) ;
+            listView.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;-fx-border-color : rgb(189,18,19) ");
         } else {
             word = inputWordTextField.getText();
             String mean = dictionary.searchWordTrie(word);
@@ -148,12 +155,17 @@ public class FindWord implements Initializable {
         }
     }
 
+    public void listViewClick(){
+        String text = listView.getSelectionModel().getSelectedItem().toString();
+        String mean = dictionary.searchWordTrie(text);
+        explainTextArea.setText(mean);
+    }
+
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //set styles for 2 boxes
-        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;-fx-border-color : rgb(189,18,19) ");
+        // explain area setup
         explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 16;-fx-border-color : rgb(189,18,19) ");
 
         //  icon sound
@@ -204,5 +216,6 @@ public class FindWord implements Initializable {
         iconImageView.setFitWidth(60);
         googleButton.setGraphic(iconImageView);
         googleButton.setStyle("-fx-background-color: rgb(255,255,255);-fx-border-color : rgb(155,0,125) ;");
+
     }
 }
