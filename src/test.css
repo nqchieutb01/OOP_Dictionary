@@ -1,0 +1,20 @@
+*{
+    dark-primary-color     :#C2185B;
+    default-primary-color : #E91E63;
+    light-primary-color   : #F8BBD0;
+    text-primary-color   : #FFFFFF;
+    accent-color          : #CDDC39;
+    primary-text-color    : #212121;
+    secondary-text-color  : #757575;
+    divider-color        : #BDBDBD;
+}
+
+.root{
+  -fx-background-color : default-primary-color;
+}
+.button{
+    -fx-font: 16px "Arial";
+    -fx-padding :5;
+    -fx-background-color :accent-color;
+    -fx-background-radius :8;
+}

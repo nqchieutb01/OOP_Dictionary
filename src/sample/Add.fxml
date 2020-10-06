@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefWidth="901.0" stylesheets="@../addbgr.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Add">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="560.0" fitWidth="901.0" layoutX="-6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="0.0" />
+      <Button fx:id="buttonHome" layoutX="750.0" layoutY="21.0" mnemonicParsing="false" onAction="#pressButtonFindWord" prefHeight="49.0" prefWidth="51.0" />
+      <Button fx:id="buttonAdd" layoutX="750.0" layoutY="280.0" mnemonicParsing="false" onAction="#pressAgreeAddNewWord" prefHeight="49.0" prefWidth="51.0" />
+      <Label layoutX="57.0" layoutY="199.0" prefHeight="64.0" prefWidth="124.0" text="Từ mới" textFill="#da0909">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <Label layoutX="65.0" layoutY="351.0" prefHeight="49.0" prefWidth="124.0" text="Nghĩa" textFill="#da0909">
+         <font>
+            <Font name="System Bold" size="33.0" />
+         </font>
+      </Label>
+      <TextField fx:id="textFieldWord" layoutX="276.0" layoutY="199.0" prefHeight="64.0" prefWidth="385.0" />
+      <TextField fx:id="textFieldExplain" layoutX="276.0" layoutY="351.0" prefHeight="64.0" prefWidth="385.0" />
+      <Label fx:id="labelNotification" layoutX="273.0" layoutY="471.0" prefHeight="27.0" prefWidth="385.0" textFill="#0ddb0e">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

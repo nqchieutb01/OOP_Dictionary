@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main extends Application {
+
     // data
     public static DictionaryManagement dictionaryManagement;
     public static Dictionary dictionary ;
@@ -31,6 +32,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FindWord.fxml"));
         primaryStage.setTitle("Dictionary");
         primaryStage.setScene(new Scene(root, 1024, 604));
+
         //primaryStage.setScene(new Scene(root, 500, 800));
         primaryStage.show();
     }

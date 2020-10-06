@@ -22,7 +22,7 @@ public class DictionaryManagement {
     }
 
     public void insertFromFile() throws IOException {
-        File myFile = new File("C:\\Users\\Admin\\IdeaProjects\\OOP_Dictionary\\src\\data.txt");
+        File myFile = new File("C:\\Users\\Admin\\IdeaProjects\\OOP_Dictionary\\src\\test.txt");
         Scanner scanner = new Scanner(myFile);
         String word_target = "";
         String word_explain = "";

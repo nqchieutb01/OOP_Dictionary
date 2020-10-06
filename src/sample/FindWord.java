@@ -53,12 +53,14 @@ public class FindWord implements Initializable {
 
     // GG translate
     private Translator translator = new Translator();
+
+    // BUtton
     @FXML private Button soundButton;
     @FXML private Button homeButton;
     @FXML private Button googleButton;
-    @FXML private Button myPcButton;
     @FXML private Button addButton;
     @FXML private Button subtractButton;
+    @FXML private Button replaceButton ;
 
     // input  ,recommend,explain word
     @FXML private TextField inputWordTextField;
@@ -73,6 +75,34 @@ public class FindWord implements Initializable {
         window.setScene(viewNext);
         window.show();
     }
+
+    public void pressButtonAdd(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent viewNextParent = FXMLLoader.load(getClass().getResource("Add.fxml"));
+        Scene viewNext = new Scene(viewNextParent);
+        //Get the stage information
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(viewNext);
+        window.show();
+    }
+
+    public void pressButtonReplace(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent viewNextParent = FXMLLoader.load(getClass().getResource("Replace.fxml"));
+        Scene viewNext = new Scene(viewNextParent);
+        //Get the stage information
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(viewNext);
+        window.show();
+    }
+
+    public void pressButtonDelete(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent viewNextParent = FXMLLoader.load(getClass().getResource("Delete.fxml"));
+        Scene viewNext = new Scene(viewNextParent);
+        //Get the stage information
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(viewNext);
+        window.show();
+    }
+
     @FXML private Button audioButton;
     public void audioButton() throws IOException, JavaLayerException {
         String word = inputWordTextField.getText();
@@ -122,10 +152,9 @@ public class FindWord implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
-
-        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;");
-        explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 16;");
+        //set styles for 2 boxes
+        recommendTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;-fx-border-color : rgb(189,18,19) ");
+        explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 16;-fx-border-color : rgb(189,18,19) ");
 
         //  icon sound
         Image iconImage = new Image("img/icons8_Audio_20px.png");
@@ -141,7 +170,7 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         homeButton.setGraphic(iconImageView);
-        homeButton.setStyle("-fx-background-color: rgb(255,255,255)");
+        homeButton.setStyle("-fx-border-color : rgb(189,18,19) ");
 
         // add icon
         iconImage = new Image("img/add.png");
@@ -149,30 +178,31 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         addButton.setGraphic(iconImageView);
-        addButton.setStyle("-fx-background-color: rgb(255,255,255)");
-        addButton.setShape(new Circle(4));
+        addButton.setStyle("-fx-border-color : rgb(189,18,19) ");
+       // addButton.setShape(new Circle(4));
+
         // subtract icon
         iconImage = new Image("img/subtract.png");
         iconImageView = new ImageView(iconImage);
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         subtractButton.setGraphic(iconImageView);
-        subtractButton.setStyle("-fx-background-color: rgb(255,255,255)");
-        subtractButton.setShape(new Circle(4));
+        subtractButton.setStyle("-fx-border-color : rgb(189,18,19) ");
+      //  subtractButton.setShape(new Circle(4));
 
-        // find icon from database and gg translate
-        iconImage = new Image("img/search.jpg");
-        iconImageView = new ImageView(iconImage);
-        iconImageView.setFitHeight(60);
-        iconImageView.setFitWidth(62);
-        myPcButton.setGraphic(iconImageView);
-        myPcButton.setStyle("-fx-background-color: rgb(255,255,255)");
+        /* find icon from database and gg translate */
+        Image iconImage1 = new Image("img/replace.png") ;
+        iconImageView = new ImageView(iconImage1);
+        iconImageView.setFitHeight(36);
+        iconImageView.setFitWidth(39);
+        replaceButton.setGraphic(iconImageView);
+        replaceButton.setStyle("-fx-border-color : rgb(189,18,19) ");
 
-        iconImage = new Image("img/searchgg.png");
+        iconImage = new Image("img/Google_Translate_Icon.jpg");
         iconImageView = new ImageView(iconImage);
-        iconImageView.setFitHeight(60);
-        iconImageView.setFitWidth(62);
+        iconImageView.setFitHeight(50);
+        iconImageView.setFitWidth(60);
         googleButton.setGraphic(iconImageView);
-        googleButton.setStyle("-fx-background-color: rgb(255,255,255)");
+        googleButton.setStyle("-fx-background-color: rgb(255,255,255);-fx-border-color : rgb(155,0,125) ;");
     }
 }
