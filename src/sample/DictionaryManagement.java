@@ -25,7 +25,7 @@ public class DictionaryManagement {
 
     public void insertFromFile() throws IOException {
 
-        File myFile = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/test.txt");
+        File myFile = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/data.txt");
         Scanner scanner = new Scanner(myFile);
         String word_target = "";
         String word_explain = "";

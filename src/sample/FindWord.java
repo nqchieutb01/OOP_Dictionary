@@ -1,4 +1,5 @@
 package sample;
+
 import ggTranslate.Translator;
 import ggTranslate.Audio;
 import javafx.collections.FXCollections;
@@ -49,7 +50,8 @@ import static sample.Main.trie;
 
 public class FindWord implements Initializable {
 
-    @FXML private AnchorPane anchorPane;
+    @FXML
+    private AnchorPane anchorPane;
 
     //audio
     private Audio audio = Audio.getInstance();
@@ -58,28 +60,44 @@ public class FindWord implements Initializable {
     private Translator translator = new Translator();
 
     //Label
-    @FXML private Label labelExplain;
-    @FXML private Label labelRecommend;
+    @FXML
+    private Label labelExplain;
+    @FXML
+    private Label labelRecommend;
 
-    @FXML private VBox vBoxExplain;
-    @FXML private HBox hBoxRecommend;
+    @FXML
+    private VBox vBoxExplain;
+    @FXML
+    private HBox hBoxRecommend;
 
     // Button
-    @FXML private Button soundButton;
-    @FXML private Button homeButton;
-    @FXML private Button googleButton;
-    @FXML private Button addButton;
-    @FXML private Button subtractButton;
-    @FXML private Button replaceButton ;
-    @FXML private Button likeButton;
+    @FXML
+    private Button soundButton;
+    @FXML
+    private Button homeButton;
+    @FXML
+    private Button googleButton;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button subtractButton;
+    @FXML
+    private Button replaceButton;
+    @FXML
+    private Button likeButton;
 
-    @FXML private ListView listView ;
+    @FXML
+    private ListView listView;
 
     // input  ,recommend,explain word
-    @FXML private TextField inputWordTextField;
-    @FXML private TextArea recommendTextArea;
-    @FXML private TextArea explainTextArea;
+    @FXML
+    private TextField inputWordTextField;
+    @FXML
+    private TextArea recommendTextArea;
+    @FXML
+    private TextArea explainTextArea;
 
+    // press home button
     public void pressButtonHome(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent viewNextParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Scene viewNext = new Scene(viewNextParent);
@@ -89,6 +107,7 @@ public class FindWord implements Initializable {
         window.show();
     }
 
+    // press add button
     public void pressButtonAdd(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent viewNextParent = FXMLLoader.load(getClass().getResource("Add.fxml"));
         Scene viewNext = new Scene(viewNextParent);
@@ -98,6 +117,7 @@ public class FindWord implements Initializable {
         window.show();
     }
 
+    // press replace button
     public void pressButtonReplace(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent viewNextParent = FXMLLoader.load(getClass().getResource("Replace.fxml"));
         Scene viewNext = new Scene(viewNextParent);
@@ -107,6 +127,7 @@ public class FindWord implements Initializable {
         window.show();
     }
 
+    //press delete button
     public void pressButtonDelete(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent viewNextParent = FXMLLoader.load(getClass().getResource("Delete.fxml"));
         Scene viewNext = new Scene(viewNextParent);
@@ -116,18 +137,21 @@ public class FindWord implements Initializable {
         window.show();
     }
 
-    @FXML private Button audioButton;
+    // audio button
+    @FXML
+    private Button audioButton;
+
     public void audioButton() throws IOException, JavaLayerException {
         String word = inputWordTextField.getText();
-        if(word.length()==0) return;
-        InputStream sound = audio.getAudio(word,"en");
+        if (word.length() == 0) return;
+        InputStream sound = audio.getAudio(word, "en");
         audio.play(sound);
     }
 
     // Find word in GG
     public void buttonFindPressGG() throws Exception {
         String word = inputWordTextField.getText();
-        String ggTranslate = translator.callUrlAndParseResult("en","vi",word);
+        String ggTranslate = translator.callUrlAndParseResult("en", "vi", word);
         //recommendTextArea.setFont(javafx.scene.text.Font.font("Monospaced",28));
         explainTextArea.setText(ggTranslate);
     }
@@ -135,28 +159,26 @@ public class FindWord implements Initializable {
     // Find word from database
     public void buttonFindPressDB() throws Exception {
         String word = inputWordTextField.getText();
-      //  System.out.println(word);
         String mean = dictionary.searchWordTrie(word);
         explainTextArea.setText(mean);
     }
 
-    //text area key press
-
-    public void textAreaKeyPressListView(KeyEvent t){
+    //text area key press (word recommend)
+    public void textAreaKeyPressListView(KeyEvent t) {
         String word = inputWordTextField.getText();
-        if(word.length()==0) return;
-        if(t.getCode() != KeyCode.ENTER){
+        if (word.length() == 0) return;
+        if (t.getCode() != KeyCode.ENTER) {
             word = inputWordTextField.getText();
             ArrayList<Integer> rcm = trie.recommendWord(word);
             String recommend = "";
             listView.getItems().clear();
             ObservableList<String> recommends = FXCollections.observableArrayList();
 
-            for(Integer x:rcm){
-                recommend += Dict.get(x).getWordTarget() +'\n';
-                recommends.add(Dict.get(x).getWordTarget()) ;
+            for (Integer x : rcm) {
+                recommend += Dict.get(x).getWordTarget() + '\n';
+                recommends.add(Dict.get(x).getWordTarget());
             }
-            listView.getItems().addAll(recommends) ;
+            listView.getItems().addAll(recommends);
         } else {
             word = inputWordTextField.getText();
             String mean = dictionary.searchWordTrie(word);
@@ -164,13 +186,16 @@ public class FindWord implements Initializable {
         }
     }
 
-    public void listViewClick(){
+    // click on list view to see explanation of word
+    public void listViewClick() {
         String text = listView.getSelectionModel().getSelectedItem().toString();
         String mean = dictionary.searchWordTrie(text);
         explainTextArea.setText(mean);
     }
 
-    @FXML
+    /**
+     * Init function.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -196,7 +221,7 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         homeButton.setGraphic(iconImageView);
-        homeButton.setStyle("-fx-border-color : rgb(189,18,19);-fx-background-radius: 10 ");
+        homeButton.setStyle("-fx-background-radius: 10 ");
 
         // add icon
         iconImage = new Image("img/add.png");
@@ -204,8 +229,8 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         addButton.setGraphic(iconImageView);
-        addButton.setStyle("-fx-border-color : rgb(189,18,19);-fx-background-radius: 10 ");
-       // addButton.setShape(new Circle(4));
+        addButton.setStyle("-fx-background-radius: 10 ");
+        // addButton.setShape(new Circle(4));
 
         // subtract icon
         iconImage = new Image("img/subtract.png");
@@ -213,23 +238,23 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         subtractButton.setGraphic(iconImageView);
-        subtractButton.setStyle("-fx-border-color : rgb(189,18,19) ");
-      //  subtractButton.setShape(new Circle(4));
+        subtractButton.setStyle("-fx-background-radius: 10 ");
+        //  subtractButton.setShape(new Circle(4));
 
         /* find icon from database and gg translate */
-        Image iconImage1 = new Image("img/replace.png") ;
+        Image iconImage1 = new Image("img/replace.png");
         iconImageView = new ImageView(iconImage1);
         iconImageView.setFitHeight(36);
         iconImageView.setFitWidth(39);
         replaceButton.setGraphic(iconImageView);
-        replaceButton.setStyle("-fx-border-color : rgb(189,18,19) ");
+        replaceButton.setStyle("-fx-background-radius: 10");
 
         iconImage = new Image("img/Google_Translate_Icon.jpg");
         iconImageView = new ImageView(iconImage);
         iconImageView.setFitHeight(50);
         iconImageView.setFitWidth(60);
         googleButton.setGraphic(iconImageView);
-        googleButton.setStyle("-fx-background-color: rgb(255,255,255);-fx-border-color : rgb(155,0,125) ;");
+        googleButton.setStyle("-fx-border-color : rgb(155,0,125) ;");
 
     }
 }
