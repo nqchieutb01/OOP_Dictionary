@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,18 +46,31 @@ public class Add implements Initializable {
         window.show();
     }
 
+    void addNewWordInFile(String wt,String we) throws IOException {
+        File f = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/addWord.txt");
+        FileWriter bw = new FileWriter(f,true);
+        bw.write(wt+"-"+we+"\n");
+        bw.append("\n");
+        bw.flush();
+    }
+
     // press ok when add new word
     public void pressAgreeAddNewWord() throws Exception{
         String wt = textFieldWord.getText();
         String we = textFieldExplain.getText();
         dictionary.addWordTrie(wt,we);
+        addNewWordInFile(wt,we);
         labelNotification.setText("Word "+ wt +" has been added successfully");
         labelNotification.setVisible(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-      //  labelNotification.setVisible(true);
+
+        textFieldWord.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced;-fx-highlight-text-fill: #090909; -fx-text-fill: #09ff08");
+        textFieldExplain.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced;-fx-highlight-text-fill: #090909; -fx-text-fill: #09ff08");
+
+        //  labelNotification.setVisible(true);
         backgroundImage = new Image("img/addbgr.jpg");
         imageView.setImage(backgroundImage);
         imageView.setFitWidth(950);

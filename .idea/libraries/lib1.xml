@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="lib1">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-14.0.2/lib" />
+      <root url="file:///Program Files/Java/jdk-14.0.2/lib" />
       <root url="jar://$PROJECT_DIR$/dist/lib/java-json.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-14.0.2/lib" />
+      <root url="file:///Program Files/Java/jdk-14.0.2/lib" />
       <root url="jar://$PROJECT_DIR$/dist/lib/java-json.jar!/" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-14.0.2/lib" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files/Java/jdk-14.0.2/lib" recursive="false" type="SOURCES" />
+    <jarDirectory url="file:///Program Files/Java/jdk-14.0.2/lib" recursive="false" />
+    <jarDirectory url="file:///Program Files/Java/jdk-14.0.2/lib" recursive="false" type="SOURCES" />
   </library>
 </component>

@@ -59,6 +59,7 @@ public class Dictionary {
 
     public String deleteWordTrie(String wt) {
         int indexRemove = trie.delete(wt);
+        if(indexRemove==-1) return "";
         String wordExplain = Dict.get(indexRemove).getWordExplain();
         Dict.remove(wt);
         return wordExplain ;

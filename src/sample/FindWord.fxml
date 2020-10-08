@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="605.0" prefWidth="1023.0" style="-fx-background-color: #ffffff;" stylesheets="@../test.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FindWord">
+<AnchorPane fx:id="anchorPane" prefHeight="605.0" prefWidth="1023.0" style="-fx-background-color: #ffffff;" stylesheets="@../test.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FindWord">
    <children>
       <HBox layoutX="3.0" layoutY="73.0" prefHeight="62.0" prefWidth="349.0">
          <children>
@@ -22,36 +24,34 @@
             <Button fx:id="googleButton" mnemonicParsing="false" onAction="#buttonFindPressGG" prefHeight="63.0" prefWidth="73.0" />
          </children>
       </HBox>
-      <Label layoutX="-2.0" layoutY="8.0" prefHeight="55.0" prefWidth="421.0" text="Dictionary English - VietNamese" textFill="#d70a0a">
+      <Label layoutX="-2.0" layoutY="8.0" prefHeight="62.0" prefWidth="443.0" text="Dictionary English - VietNamese" textFill="#d60b0b">
          <font>
-            <Font name="Arial Bold" size="27.0" />
+            <Font name="System Bold" size="27.0" />
          </font>
       </Label>
-      <VBox layoutX="424.0" layoutY="134.0" prefHeight="43.0" prefWidth="601.0">
+      <VBox fx:id="vBoxExplain" layoutX="245.0" layoutY="138.0" prefHeight="43.0" prefWidth="738.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0">
          <children>
-            <Label prefHeight="46.0" prefWidth="504.0" text="                  Explain">
+            <Label prefHeight="44.0" prefWidth="114.0" text="Explain">
                <font>
-                  <Font name="System Bold Italic" size="31.0" />
+                  <Font name="System Bold" size="29.0" />
                </font>
             </Label>
          </children>
+         <padding>
+            <Insets left="300.0" />
+         </padding>
       </VBox>
       <Button fx:id="soundButton" layoutX="983.0" layoutY="185.0" mnemonicParsing="false" onAction="#audioButton" prefHeight="40.0" prefWidth="40.0" textOverrun="WORD_ELLIPSIS">
          <cursor>
             <Cursor fx:constant="NE_RESIZE" />
          </cursor>
       </Button>
-      <Label layoutX="599.0" layoutY="54.0" prefHeight="20.0" prefWidth="51.0" text=" Home" textFill="#bf0a10">
+      <Label layoutX="587.0" layoutY="54.0" prefHeight="25.0" prefWidth="71.0" text=" Home" textFill="#bf0a10">
          <font>
-            <Font name="Bauhaus 93" size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="42.0" layoutY="137.0" text="Recommend">
-         <font>
-            <Font name="System Bold Italic" size="28.0" />
-         </font>
-      </Label>
-      <Label layoutX="825.0" layoutY="51.0" text=" Add" textFill="#bf0a10">
+      <Label layoutX="835.0" layoutY="51.0" prefHeight="25.0" prefWidth="49.0" text=" Add" textFill="#bf0a10">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -95,5 +95,20 @@
          </children>
       </HBox>
       <ListView fx:id="listView" layoutX="3.0" layoutY="186.0" onInputMethodTextChanged="#textAreaKeyPressListView" onKeyPressed="#textAreaKeyPressListView" onKeyReleased="#textAreaKeyPressListView" onMouseClicked="#listViewClick" prefHeight="421.0" prefWidth="240.0" />
+      <HBox fx:id="hBoxRecommend" layoutX="4.0" layoutY="138.0" prefHeight="44.0" prefWidth="240.0">
+         <children>
+            <Label prefHeight="41.0" prefWidth="159.0" text="Recommend">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>

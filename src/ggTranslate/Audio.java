@@ -9,10 +9,6 @@ import java.net.URLConnection;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
-/**
- *
- * @author thanh
- */
 public class Audio {
 
     private static Audio audio;

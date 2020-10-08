@@ -39,12 +39,12 @@ public class Trie {
         for(int i=0;i<key.length();i++){
             int index = key.charAt(i) - ' ' ;
             if(index > MAX_CHAR || index<0) continue;
+            if(it==null) return -1;
             it = it.children[index] ;
         }
         indexRemove = it.isEndOfWord ;
         it.isEndOfWord = -1 ;
         return indexRemove ;
-
     }
     public int search(String s) {
         String key = s.toUpperCase();

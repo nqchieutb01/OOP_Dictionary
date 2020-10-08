@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,6 +22,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.FontWeight;
@@ -54,7 +57,14 @@ public class FindWord implements Initializable {
     // GG translate
     private Translator translator = new Translator();
 
-    // BUtton
+    //Label
+    @FXML private Label labelExplain;
+    @FXML private Label labelRecommend;
+
+    @FXML private VBox vBoxExplain;
+    @FXML private HBox hBoxRecommend;
+
+    // Button
     @FXML private Button soundButton;
     @FXML private Button homeButton;
     @FXML private Button googleButton;
@@ -147,7 +157,6 @@ public class FindWord implements Initializable {
                 recommends.add(Dict.get(x).getWordTarget()) ;
             }
             listView.getItems().addAll(recommends) ;
-            listView.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;-fx-border-color : rgb(189,18,19) ");
         } else {
             word = inputWordTextField.getText();
             String mean = dictionary.searchWordTrie(word);
@@ -165,8 +174,13 @@ public class FindWord implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // setup listview styles
+        listView.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 22;-fx-background-radius: 10 ");
         // explain area setup
-        explainTextArea.setStyle("-fx-control-inner-background:#000001; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 16;-fx-border-color : rgb(189,18,19) ");
+        explainTextArea.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Monospaced; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size : 18;-fx-background-radius: 10 ");
+
+        vBoxExplain.setStyle("-fx-background-color :rgb(175, 28, 73);-fx-background-radius: 10");
+        hBoxRecommend.setStyle("-fx-background-color :rgb(175, 28, 73);-fx-background-radius: 10");
 
         //  icon sound
         Image iconImage = new Image("img/icons8_Audio_20px.png");
@@ -182,7 +196,7 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         homeButton.setGraphic(iconImageView);
-        homeButton.setStyle("-fx-border-color : rgb(189,18,19) ");
+        homeButton.setStyle("-fx-border-color : rgb(189,18,19);-fx-background-radius: 10 ");
 
         // add icon
         iconImage = new Image("img/add.png");
@@ -190,7 +204,7 @@ public class FindWord implements Initializable {
         iconImageView.setFitHeight(39);
         iconImageView.setFitWidth(36);
         addButton.setGraphic(iconImageView);
-        addButton.setStyle("-fx-border-color : rgb(189,18,19) ");
+        addButton.setStyle("-fx-border-color : rgb(189,18,19);-fx-background-radius: 10 ");
        // addButton.setShape(new Circle(4));
 
         // subtract icon

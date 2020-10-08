@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,12 +51,22 @@ public class Delete implements Initializable { // back ground
         window.show();
     }
 
+    // write in file delete.txt
+    void addNewWordInFile(String wt) throws IOException {
+        File f = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/delete.txt");
+        FileWriter bw = new FileWriter(f,true);
+        bw.write(wt+"\n");
+        bw.append("\n");
+        bw.flush();
+    }
+
     // press ok when add new word
     public void pressAgreeDeleteWord() throws Exception {
         String wt = textFieldWord.getText();
         if (trie.search(wt) != -1) {
             labelNotification.setText("Word " + wt + " has been deleted successfully");
             dictionary.deleteWordTrie(wt);
+            addNewWordInFile(wt);
         } else {
             labelNotification.setText("Sorry !! Word " + wt + " can't be found in my data");
         }

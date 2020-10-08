@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,10 +47,24 @@ public class Replace implements Initializable {
         window.show();
     }
 
+    // add word in replace.txt
+    void addNewWordInFile(String ws,String wt) throws IOException {
+        File f = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/replace.txt");
+        FileWriter bw = new FileWriter(f,true);
+        bw.write(ws+"-"+wt+"\n");
+        bw.append("\n");
+        bw.flush();
+    }
+
     // press ok when add new word
     public void pressAgreeAddNewWord() throws Exception{
         String ws = textFieldWord.getText();
         String wt = textFieldExplain.getText();
+        if(trie.search(ws)==-1){
+            System.out.println("Can't find "+ws+ "in dictionary");
+            return;
+        }
+        addNewWordInFile(ws,wt);
         String wordExplain = dictionary.deleteWordTrie(ws);
         dictionary.addWordTrie(wt,wordExplain);
         labelNotification.setText("Word "+ ws +" has been replaced successfully");

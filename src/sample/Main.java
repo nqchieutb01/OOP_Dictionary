@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -23,6 +23,7 @@ public class Main extends Application {
         dictionaryManagement = new DictionaryManagement();
         try {
             dictionaryManagement.insertFromFile();
+            dictionaryManagement.insertFromAddFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
