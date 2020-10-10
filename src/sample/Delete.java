@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.Main.dictionary;
+import static sample.Main.trie;
 import static sample.Main.trie;
 
 public class Delete implements Initializable { // back ground
@@ -51,22 +51,12 @@ public class Delete implements Initializable { // back ground
         window.show();
     }
 
-    // write in file delete.txt
-    void addNewWordInFile(String wt) throws IOException {
-        File f = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/delete.txt");
-        FileWriter bw = new FileWriter(f,true);
-        bw.write(wt+"\n");
-        bw.append("\n");
-        bw.flush();
-    }
-
     // press ok when add new word
     public void pressAgreeDeleteWord() throws Exception {
         String wt = textFieldWord.getText();
-        if (trie.search(wt) != -1) {
+        if (!trie.search(wt).equals(new String("not found"))) {
             labelNotification.setText("Word " + wt + " has been deleted successfully");
-            dictionary.deleteWordTrie(wt);
-            addNewWordInFile(wt);
+            trie.delete(wt);
         } else {
             labelNotification.setText("Sorry !! Word " + wt + " can't be found in my data");
         }
@@ -76,6 +66,8 @@ public class Delete implements Initializable { // back ground
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        textFieldWord.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced; -fx-text-fill: #39ff48");
+
         //  labelNotification.setVisible(true);
         backgroundImage = new Image("img/addbgr.jpg");
         imageView.setImage(backgroundImage);
@@ -84,7 +76,7 @@ public class Delete implements Initializable { // back ground
         imageView.setVisible(true);
 
         // home button
-        Image iconImage = new Image("img/home1.jpg");
+        Image iconImage = new Image("img/back.png");
         ImageView iconImageView = new ImageView(iconImage);
         iconImageView.setFitHeight(49);
         iconImageView.setFitWidth(51);

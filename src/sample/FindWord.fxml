@@ -41,33 +41,33 @@
             <Insets left="300.0" />
          </padding>
       </VBox>
-      <Button fx:id="soundButton" layoutX="983.0" layoutY="185.0" mnemonicParsing="false" onAction="#audioButton" prefHeight="40.0" prefWidth="40.0" textOverrun="WORD_ELLIPSIS">
+      <Button fx:id="soundButton" layoutX="983.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#audioButton" prefHeight="40.0" prefWidth="40.0" textOverrun="WORD_ELLIPSIS">
          <cursor>
             <Cursor fx:constant="NE_RESIZE" />
          </cursor>
       </Button>
-      <Label layoutX="587.0" layoutY="54.0" prefHeight="25.0" prefWidth="71.0" text=" Home" textFill="#bf0a10">
+      <Label layoutX="516.0" layoutY="54.0" prefHeight="25.0" prefWidth="59.0" text=" Home" textFill="#bf0a10">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="835.0" layoutY="51.0" prefHeight="25.0" prefWidth="49.0" text=" Add" textFill="#bf0a10">
+      <Label layoutX="735.0" layoutY="54.0" prefHeight="25.0" prefWidth="59.0" text=" Add" textFill="#bf0a10">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="711.0" layoutY="51.0" text="Delete" textFill="#bf0a10">
+      <Label layoutX="637.0" layoutY="51.0" prefHeight="25.0" prefWidth="59.0" text="Delete" textFill="#bf0a10">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <TextArea fx:id="explainTextArea" layoutX="245.0" layoutY="185.0" prefHeight="421.0" prefWidth="738.0" />
-      <Label layoutX="928.0" layoutY="51.0" text="Replace" textFill="#c60d0d">
+      <Label layoutX="825.0" layoutY="54.0" text="Replace" textFill="#c60d0d">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="530.0" layoutY="5.0" prefHeight="40.0" prefWidth="495.0">
+      <HBox layoutX="463.0" layoutY="5.0" prefHeight="40.0" prefWidth="562.0">
          <children>
             <Button fx:id="homeButton" mnemonicParsing="false" onAction="#pressButtonHome" prefHeight="39.0" prefWidth="36.0">
                <HBox.margin>
@@ -81,16 +81,21 @@
             </Button>
             <Button fx:id="addButton" mnemonicParsing="false" onAction="#pressButtonAdd" prefHeight="39.0" prefWidth="36.0">
                <HBox.margin>
-                  <Insets left="65.0" />
+                  <Insets left="41.0" />
                </HBox.margin>
             </Button>
             <Button fx:id="replaceButton" mnemonicParsing="false" onAction="#pressButtonReplace" prefHeight="39.0" prefWidth="36.0">
                <HBox.margin>
-                  <Insets left="60.0" />
+                  <Insets left="50.0" />
                </HBox.margin>
                <padding>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </padding>
+            </Button>
+            <Button fx:id="recentlyButton" mnemonicParsing="false" onAction="#pressButtonRecent" prefHeight="39.0" prefWidth="36.0">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
             </Button>
          </children>
       </HBox>
@@ -110,5 +115,21 @@
             <Insets left="30.0" />
          </padding>
       </HBox>
+      <Label layoutX="993.0" layoutY="228.0" prefHeight="25.0" prefWidth="23.0" text="EN">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="audioButtonVN" layoutX="985.0" layoutY="253.0" mnemonicParsing="false" onMouseClicked="#setAudioButtonVN" prefHeight="40.0" prefWidth="40.0" />
+      <Label layoutX="994.0" layoutY="304.0" prefHeight="18.0" prefWidth="23.0" text="VN">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="915.0" layoutY="55.0" prefHeight="25.0" prefWidth="87.0" text="Recently" textFill="#cd0303">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

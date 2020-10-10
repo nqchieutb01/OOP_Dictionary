@@ -44,14 +44,18 @@ import java.util.Stack;
 
 import sample.Main;
 
-import static sample.Main.dictionary;
-import static sample.Main.Dict;
 import static sample.Main.trie;
-
+import static sample.Main.wordsRecently;
 public class FindWord implements Initializable {
 
     @FXML
     private AnchorPane anchorPane;
+
+    // audio button
+    @FXML
+    private Button audioButton;
+    @FXML
+    private Button audioButtonVN;
 
     //audio
     private Audio audio = Audio.getInstance();
@@ -83,6 +87,8 @@ public class FindWord implements Initializable {
     private Button subtractButton;
     @FXML
     private Button replaceButton;
+    @FXML
+    private Button recentlyButton;
     @FXML
     private Button likeButton;
 
@@ -127,6 +133,16 @@ public class FindWord implements Initializable {
         window.show();
     }
 
+    // press replace button
+    public void pressButtonRecent(javafx.event.ActionEvent actionEvent) throws IOException {
+        Parent viewNextParent = FXMLLoader.load(getClass().getResource("Recently.fxml"));
+        Scene viewNext = new Scene(viewNextParent);
+        //Get the stage information
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(viewNext);
+        window.show();
+    }
+
     //press delete button
     public void pressButtonDelete(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent viewNextParent = FXMLLoader.load(getClass().getResource("Delete.fxml"));
@@ -137,15 +153,19 @@ public class FindWord implements Initializable {
         window.show();
     }
 
-    // audio button
-    @FXML
-    private Button audioButton;
-
     public void audioButton() throws IOException, JavaLayerException {
         String word = inputWordTextField.getText();
         if (word.length() == 0) return;
         InputStream sound = audio.getAudio(word, "en");
         audio.play(sound);
+    }
+    public void setAudioButtonVN() throws Exception {
+        String word = inputWordTextField.getText();
+        String ggTranslate = translator.callUrlAndParseResult("en", "vi", word);
+        if (word.length() == 0) return;
+        try (InputStream sound = audio.getAudio(ggTranslate, "vi")) {
+            audio.play(sound);
+        }
     }
 
     // Find word in GG
@@ -153,15 +173,10 @@ public class FindWord implements Initializable {
         String word = inputWordTextField.getText();
         String ggTranslate = translator.callUrlAndParseResult("en", "vi", word);
         //recommendTextArea.setFont(javafx.scene.text.Font.font("Monospaced",28));
+        wordsRecently.addWord(word);
         explainTextArea.setText(ggTranslate);
     }
 
-    // Find word from database
-    public void buttonFindPressDB() throws Exception {
-        String word = inputWordTextField.getText();
-        String mean = dictionary.searchWordTrie(word);
-        explainTextArea.setText(mean);
-    }
 
     //text area key press (word recommend)
     public void textAreaKeyPressListView(KeyEvent t) {
@@ -169,27 +184,27 @@ public class FindWord implements Initializable {
         if (word.length() == 0) return;
         if (t.getCode() != KeyCode.ENTER) {
             word = inputWordTextField.getText();
-            ArrayList<Integer> rcm = trie.recommendWord(word);
+            ArrayList<String> rcm = trie.recommendWord(word);
             String recommend = "";
             listView.getItems().clear();
             ObservableList<String> recommends = FXCollections.observableArrayList();
-
-            for (Integer x : rcm) {
-                recommend += Dict.get(x).getWordTarget() + '\n';
-                recommends.add(Dict.get(x).getWordTarget());
-            }
+            recommends.addAll(rcm);
             listView.getItems().addAll(recommends);
         } else {
             word = inputWordTextField.getText();
-            String mean = dictionary.searchWordTrie(word);
+            wordsRecently.addWord(word);
+            String mean = trie.search(word);
             explainTextArea.setText(mean);
         }
     }
 
     // click on list view to see explanation of word
     public void listViewClick() {
-        String text = listView.getSelectionModel().getSelectedItem().toString();
-        String mean = dictionary.searchWordTrie(text);
+        String text = new String();
+        text = listView.getSelectionModel().getSelectedItem().toString();
+        inputWordTextField.setText(text);
+        wordsRecently.addWord(text);
+        String mean = trie.search(text);
         explainTextArea.setText(mean);
     }
 
@@ -214,6 +229,13 @@ public class FindWord implements Initializable {
         iconImageView.setFitWidth(25);
         soundButton.setGraphic(iconImageView);
         soundButton.setShape(new Circle(2));
+
+        iconImage = new Image("img/icons8_Audio_20px_2.png");
+        iconImageView = new ImageView(iconImage);
+        iconImageView.setFitHeight(25);
+        iconImageView.setFitWidth(25);
+        audioButtonVN.setGraphic(iconImageView);
+        audioButtonVN.setShape(new Circle(2));
 
         // icon Home
         iconImage = new Image("img/home1.jpg");
@@ -240,6 +262,14 @@ public class FindWord implements Initializable {
         subtractButton.setGraphic(iconImageView);
         subtractButton.setStyle("-fx-background-radius: 10 ");
         //  subtractButton.setShape(new Circle(4));
+
+        // recently icon
+        iconImage = new Image("img/recently.png");
+        iconImageView = new ImageView(iconImage);
+        iconImageView.setFitHeight(39);
+        iconImageView.setFitWidth(36);
+        recentlyButton.setGraphic(iconImageView);
+        recentlyButton.setStyle("-fx-background-radius: 10 ");
 
         /* find icon from database and gg translate */
         Image iconImage1 = new Image("img/replace.png");

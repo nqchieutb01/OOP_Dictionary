@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.Main.*;
+import static sample.Main.trie;
 
 public class Replace implements Initializable {
 
@@ -36,7 +36,6 @@ public class Replace implements Initializable {
     @FXML private Button buttonHome ;
     @FXML private Button buttonAdd ;
 
-
     // back to FindWord scene
     public void pressButtonFindWord(javafx.event.ActionEvent actionEvent) throws IOException {
         Parent viewNextParent = FXMLLoader.load(getClass().getResource("FindWord.fxml"));
@@ -47,32 +46,26 @@ public class Replace implements Initializable {
         window.show();
     }
 
-    // add word in replace.txt
-    void addNewWordInFile(String ws,String wt) throws IOException {
-        File f = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/replace.txt");
-        FileWriter bw = new FileWriter(f,true);
-        bw.write(ws+"-"+wt+"\n");
-        bw.append("\n");
-        bw.flush();
-    }
 
     // press ok when add new word
     public void pressAgreeAddNewWord() throws Exception{
         String ws = textFieldWord.getText();
         String wt = textFieldExplain.getText();
-        if(trie.search(ws)==-1){
-            System.out.println("Can't find "+ws+ "in dictionary");
+        if(trie.search(ws.toUpperCase()).equals("not_found")){
+            labelNotification.setText("Can't find "+ws+ "in dictionary");
             return;
         }
-        addNewWordInFile(ws,wt);
-        String wordExplain = dictionary.deleteWordTrie(ws);
-        dictionary.addWordTrie(wt,wordExplain);
+        String wordExplain = trie.delete(ws);
+        trie.insert(wt,wordExplain);
         labelNotification.setText("Word "+ ws +" has been replaced successfully");
         labelNotification.setVisible(true);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        textFieldWord.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced; -fx-text-fill: #506070");
+        textFieldExplain.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced;-fx-text-fill: #506070");
+
         //  labelNotification.setVisible(true);
         backgroundImage = new Image("img/addbgr.jpg");
         imageView.setImage(backgroundImage);
@@ -81,7 +74,7 @@ public class Replace implements Initializable {
         imageView.setVisible(true);
 
         // home button
-        Image iconImage = new Image("img/home1.jpg");
+        Image iconImage = new Image("img/back.png");
         ImageView iconImageView = new ImageView(iconImage);
         iconImageView.setFitHeight(49);
         iconImageView.setFitWidth(51);

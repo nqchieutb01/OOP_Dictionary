@@ -3,13 +3,15 @@ package sample;
 import java.util.ArrayList;
 
 public class Trie {
-    static final int MAX_CHAR = 'Z' - ' ' + 2;
+    private static final int MAX_CHAR = 'Z' - ' ' + 2;
 
-    static class TrieNode {
-        TrieNode[] children = new TrieNode[MAX_CHAR];
-        int isEndOfWord;
+    public static class TrieNode {
+        public TrieNode[] children = new TrieNode[MAX_CHAR];
+        public int isEndOfWord;
+        public String wort_target;
+        public String word_explain;
 
-        TrieNode() {
+        public TrieNode() {
             isEndOfWord = -1;
             for (int i = 0; i < MAX_CHAR; i++) {
                 children[i] = null;
@@ -17,9 +19,9 @@ public class Trie {
         }
     }
 
-    static TrieNode root = new TrieNode();
+    public static TrieNode root = new TrieNode();
 
-    public void insert(String s, int numerical_order) {
+    public void insert(String s, String we) {
         String key = s.toUpperCase();
         TrieNode it = root;
         for (int i = 0; i < key.length(); i++) {
@@ -30,69 +32,87 @@ public class Trie {
             }
             it = it.children[index];
         }
-        it.isEndOfWord = numerical_order;
+        it.isEndOfWord = 1;
+        it.word_explain = we;
+        it.wort_target = s;
     }
-    public int delete(String wt){
-        int indexRemove ;
-        String key = wt.toUpperCase() ;
-        TrieNode it = root ;
-        for(int i=0;i<key.length();i++){
-            int index = key.charAt(i) - ' ' ;
-            if(index > MAX_CHAR || index<0) continue;
-            if(it==null) return -1;
-            it = it.children[index] ;
-        }
-        indexRemove = it.isEndOfWord ;
-        it.isEndOfWord = -1 ;
-        return indexRemove ;
-    }
-    public int search(String s) {
-        String key = s.toUpperCase();
+
+    public String delete(String wt) {
+        int indexRemove;
+        String key = wt.toUpperCase();
         TrieNode it = root;
         for (int i = 0; i < key.length(); i++) {
             int index = key.charAt(i) - ' ';
             if (index > MAX_CHAR || index < 0) continue;
-            if (it.children[index] == null) return -1;
+            if (it == null) return "not_found";
             it = it.children[index];
         }
-        if (it != null) return it.isEndOfWord;
-        return -1;
+        indexRemove = it.isEndOfWord;
+        it.isEndOfWord = -1;
+        String res = it.word_explain;
+        it.word_explain = "";
+        return res;
     }
 
-    public ArrayList<Integer> recommendWord(String s) {
-        ArrayList<Integer> result = new ArrayList<>();
+    public String search(String s) {
         String key = s.toUpperCase();
-        //debug
-       // System.out.println(key);
         TrieNode it = root;
         for (int i = 0; i < key.length(); i++) {
             int index = key.charAt(i) - ' ';
-           // System.out.println(index);
             if (index > MAX_CHAR || index < 0) continue;
-            if(it.children[index]!=null) {
+            if (it.children[index] == null) return new String("not_found");
+            it = it.children[index];
+        }
+        if (it.isEndOfWord != -1) return it.word_explain;
+        return new String("not_found");
+    }
+
+    public ArrayList<String> recommendWord(String s) {
+        ArrayList<String> result = new ArrayList<>();
+        String key = s.toUpperCase();
+
+        TrieNode it = root;
+        for (int i = 0; i < key.length(); i++) {
+            int index = key.charAt(i) - ' ';
+            // System.out.println(index);
+            if (index > MAX_CHAR || index < 0) continue;
+            if (it.children[index] != null) {
                 it = it.children[index];
-            }
-            else return result;
+            } else return result;
         }
-        if(it.isEndOfWord!=-1){
-            result.add(it.isEndOfWord);
+        if (it.isEndOfWord != -1) {
+            result.add(it.wort_target);
         }
-        if(it!=null) result.addAll(DFS(it));
+        if (it != null) result.addAll(DFS(it));
         return result;
     }
 
-    public ArrayList<Integer> DFS(TrieNode it) {
-        ArrayList<Integer> result = new ArrayList<>();
+    public ArrayList<String> DFS(TrieNode it) {
+        ArrayList<String> result = new ArrayList<>();
         for (int index = 0; index < MAX_CHAR; index++) {
-            if(result.size()>20) return result;
+            if (result.size() > 20) return result;
             TrieNode tmp = it.children[index];
             if (tmp != null) {
-                result.addAll(DFS(tmp));
-                if (tmp.isEndOfWord!= -1) {
-                    result.add(tmp.isEndOfWord);
+                if (tmp.isEndOfWord != -1) {
+                    result.add(tmp.wort_target);
                 }
+                result.addAll(DFS(tmp));
             }
         }
         return result;
     }
+
+    public ArrayList<String> DFSAllTrie(TrieNode it) {
+        ArrayList<String> result = new ArrayList<>();
+        for (int index = 0; index < MAX_CHAR; index++)
+            if (it.children[index] != null) {
+                TrieNode tmp = it.children[index];
+                if (tmp.isEndOfWord != -1) {
+                    result.add(tmp.wort_target);
+                }
+                result.addAll(DFSAllTrie(tmp));
+            }
+        return result;
+    }
+
 }

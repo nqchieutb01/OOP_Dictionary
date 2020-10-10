@@ -17,7 +17,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static sample.Main.dictionary;
+import static sample.Main.trie;
 
 public class Add implements Initializable {
 
@@ -46,20 +46,11 @@ public class Add implements Initializable {
         window.show();
     }
 
-    void addNewWordInFile(String wt,String we) throws IOException {
-        File f = new File("/home/nguyen/IdeaProjects/OOP_Dictionary/src/addWord.txt");
-        FileWriter bw = new FileWriter(f,true);
-        bw.write(wt+"-"+we+"\n");
-        bw.append("\n");
-        bw.flush();
-    }
-
     // press ok when add new word
     public void pressAgreeAddNewWord() throws Exception{
         String wt = textFieldWord.getText();
         String we = textFieldExplain.getText();
-        dictionary.addWordTrie(wt,we);
-        addNewWordInFile(wt,we);
+        trie.insert(wt,we+'\n');
         labelNotification.setText("Word "+ wt +" has been added successfully");
         labelNotification.setVisible(true);
     }
@@ -67,8 +58,8 @@ public class Add implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        textFieldWord.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced;-fx-highlight-text-fill: #090909; -fx-text-fill: #09ff08");
-        textFieldExplain.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced;-fx-highlight-text-fill: #090909; -fx-text-fill: #09ff08");
+        textFieldWord.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced; -fx-text-fill: #39ff48");
+        textFieldExplain.setStyle("-fx-font-size : 20;-fx-font-family: Monospaced; -fx-text-fill: #39ff48");
 
         //  labelNotification.setVisible(true);
         backgroundImage = new Image("img/addbgr.jpg");
@@ -78,7 +69,7 @@ public class Add implements Initializable {
         imageView.setVisible(true);
 
         // home button
-        Image iconImage = new Image("img/home1.jpg");
+        Image iconImage = new Image("img/back.png");
         ImageView iconImageView = new ImageView(iconImage);
         iconImageView.setFitHeight(49);
         iconImageView.setFitWidth(51);
