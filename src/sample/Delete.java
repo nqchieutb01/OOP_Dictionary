@@ -54,11 +54,11 @@ public class Delete implements Initializable { // back ground
     // press ok when add new word
     public void pressAgreeDeleteWord() throws Exception {
         String wt = textFieldWord.getText();
-        if (!trie.search(wt).equals(new String("not found"))) {
+        if (trie.search(wt).equals(new String("not_found"))) {
+            labelNotification.setText("Sorry !! Word " + wt + " can't be found in my data");
+        } else {
             labelNotification.setText("Word " + wt + " has been deleted successfully");
             trie.delete(wt);
-        } else {
-            labelNotification.setText("Sorry !! Word " + wt + " can't be found in my data");
         }
         labelNotification.setVisible(true);
     }
