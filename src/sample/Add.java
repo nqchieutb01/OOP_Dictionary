@@ -50,8 +50,13 @@ public class Add implements Initializable {
     public void pressAgreeAddNewWord() throws Exception{
         String wt = textFieldWord.getText();
         String we = textFieldExplain.getText();
-        trie.insert(wt,we+'\n');
-        labelNotification.setText("Word "+ wt +" has been added successfully");
+        if(trie.search(wt).equals("not_found")) {
+            trie.insert(wt, we + '\n');
+            labelNotification.setText("Word " + wt + " has been added successfully");
+        }
+        else {
+                labelNotification.setText("Word " + wt + " already exists in your dictionary");
+        }
         labelNotification.setVisible(true);
     }
 
